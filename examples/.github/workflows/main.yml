@@ -8,4 +8,4 @@ jobs:
     - uses: actions/checkout@v1
     - name: Federacy Salus Security Scan
       id: salus_scan 
-      uses: federacy/scan-action@v1
+      uses: federacy/scan-action@0.1.1

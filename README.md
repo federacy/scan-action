@@ -26,7 +26,7 @@ jobs:
     - uses: actions/checkout@v1
     - name: Federacy Salus Scan
       id: salus_scan
-      uses: federacy/scan-action@v1
+      uses: federacy/scan-action@0.1.1
 ```
 
 ### Single scanner
@@ -42,7 +42,7 @@ jobs:
     - uses: actions/checkout@v1
     - name: Federacy Salus Scan
       id: salus_scan
-      uses: federacy/scan-action@v1
+      uses: federacy/scan-action@0.1.1
       with:
           active_scanners: "\n  - Brakeman"
           enforced_scanners: "\n  - Brakeman"
@@ -61,7 +61,7 @@ jobs:
     - uses: actions/checkout@v1
     - name: Federacy Salus Scan
       id: salus_scan
-      uses: federacy/scan-action@v1
+      uses: federacy/scan-action@0.1.1
       with:
           enforced_scanners: "none"
 ```
