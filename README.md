@@ -1,15 +1,19 @@
-# Federacy Salus Security Scan Action 
+# Salus Security Scan Action 
 
 This action utilizes [Salus](https://github.com/coinbase/salus) from Coinbase to run SAST and dependency scans. 
 
 Reports can optionally be sent to [SecureDevelopment by Federacy](https://www.securedevelopment.com) for analysis. 
 
-Steps to send reports:
+## Scanners supported
 
-1. Create free account on https://www.securedevelopment.com
-2. Click 'Applications' in navbar
-3. Click 'Create Application'
-4. Copy example job to your workflow
+| Name | Language | 
+| ---- | -------- | 
+| [Bundle Audit](https://github.com/rubysec/bundler-audit) | Ruby |
+| [Brakeman](https://github.com/presidentbeef/brakeman) | Ruby | 
+| [npm audit](https://docs.npmjs.com/cli/audit) | JavaScript |
+| [yarn audit](https://yarnpkg.com/lang/en/docs/cli/audit/) | JavaScript |
+| [Gosec](https://github.com/securego/gosec) | Go | 
+| [PatternSearch](https://github.com/coinbase/salus/blob/master/docs/scanners/pattern_search.md) | n/a (uses [Sift](https://sift-tool.org/)) | 
 
 ## Example usage
 
@@ -21,10 +25,10 @@ on: [push]
 jobs:
   salus_scan_job:
     runs-on: ubuntu-latest
-    name: Federacy Salus Security Scan Example
+    name: Salus Security Scan Example
     steps:
     - uses: actions/checkout@v1
-    - name: Federacy Salus Scan
+    - name: Salus Scan
       id: salus_scan
       uses: federacy/scan-action@0.1.1
 ```
@@ -37,10 +41,10 @@ on: [push]
 jobs:
   salus_scan_job:
     runs-on: ubuntu-latest
-    name: Federacy Salus Security Scan Example
+    name: Salus Security Scan Example
     steps:
     - uses: actions/checkout@v1
-    - name: Federacy Salus Scan
+    - name: Salus Scan
       id: salus_scan
       uses: federacy/scan-action@0.1.1
       with:
@@ -56,15 +60,49 @@ on: [push]
 jobs:
   salus_scan_job:
     runs-on: ubuntu-latest
-    name: Federacy Salus Security Scan Example
+    name: Salus Security Scan Example
     steps:
     - uses: actions/checkout@v1
-    - name: Federacy Salus Scan
+    - name: Salus Scan
       id: salus_scan
       uses: federacy/scan-action@0.1.1
       with:
           enforced_scanners: "none"
 ```
+
+### Custom configuration
+
+```
+on: [push]
+
+jobs:
+  salus_scan_job:
+    runs-on: ubuntu-latest
+    name: Salus Security Scan Example
+    steps:
+    - uses: actions/checkout@v1
+    - name: Salus Scan
+      id: salus_scan
+      uses: federacy/scan-action@0.1.1
+      env:
+        SALUS_CONFIGURATION: "file://../salus-configuration.yaml file://config/pattern_search.yaml"
+```
+
+## Inputs
+
+| attribute | description | default | options |
+| --------- | ----------- | ------- | ------- |
+| active_scanners | Scanners to run | all | Brakeman, PatternSearch, BundleAudit, NPMAudit, GoSec |
+| enforced_scanners | Scanners that block builds | all | Brakeman, PatternSearch, BundleAudit, NPMAudit, GoSec |
+| report_uri | Where to send Salus reports | file://../salus-report.json | Any URI |
+| report_format | What format to use for report | json | json, yaml, txt |
+| report_verbosity | Whether to enable a verbose report | true | true, false |
+
+Note: active_scanners and enforced_scanners must be yaml formatted for Salus configuration file.
+
+## Outputs
+
+None.
 
 ## Github Environment Variables
 
@@ -85,19 +123,12 @@ Stored in custom_info of a Salus scan.
 | github_base_ref | GITHUB_BASE_REF | Ref of the base repository, if forked |
 | github_home | HOME | Path to home directory used by Github |
 
-## Inputs
+## Sending reports to dashboard
 
-| attribute | description | default | options |
-| --------- | ----------- | ------- | ------- |
-| active_scanners | Scanners to run | all | Brakeman, PatternSearch, BundleAudit, NPMAudit, GoSec |
-| enforced_scanners | Scanners that block builds | all | Brakeman, PatternSearch, BundleAudit, NPMAudit, GoSec |
-| report_uri | Where to send Salus reports | file://../salus-report.json | Any URI |
-| report_format | What format to use for report | json | json, yaml, txt |
-| report_verbosity | Whether to enable a verbose report | true | true, false |
-| configuration_file | Location of config file in repo (overrides all other parameters except salus_executor) | "" | Any filename |
+Steps:
 
-Note: active_scanners and enforced_scanners must be yaml formatted for Salus configuration file.
+1. Create free account on [SecureDevelopment by Federacy](https://www.securedevelopment.com)
+2. Click 'Applications' in navbar
+3. Click 'Create Application'
+4. Copy example job to your workflow in `.github/workflows`
 
-## Outputs
-
-None.
