@@ -1,5 +1,7 @@
 #!/bin/sh -l
 
+export PYTHONPATH="$PYTHONPATH:/root/.local/lib/python3.7/site-packages"
+
 echo "
 config_version: 1
 active_scanners: $INPUT_ACTIVE_SCANNERS
