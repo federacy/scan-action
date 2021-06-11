@@ -136,3 +136,6 @@ Steps:
 3. Click 'Create Application'
 4. Copy example job to your workflow in `.github/workflows`
 
+## Contributors
+
+[Chris Czub](https://github.com/zbuc)
