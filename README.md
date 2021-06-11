@@ -97,6 +97,7 @@ jobs:
 | report_uri | Where to send Salus reports | file://../salus-report.json | Any URI |
 | report_format | What format to use for report | json | json, yaml, txt |
 | report_verbosity | Whether to enable a verbose report | true | true, false |
+| salus_configuration | Where to find Salus configuration | file://../salus-configuration.yaml | Any URI |
 
 Note: active_scanners and enforced_scanners must be yaml formatted for Salus configuration file.
 
