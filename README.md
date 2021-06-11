@@ -2,7 +2,7 @@
 
 This action utilizes [Salus](https://github.com/coinbase/salus) from Coinbase to run SAST and dependency scans. 
 
-Reports can optionally be sent to [SecureDevelopment by Federacy](https://www.securedevelopment.com) for analysis. 
+Bundle Audit, Brakeman, NPM Audit, and Yarn Audit reports can optionally be sent to [SecureDevelopment by Federacy](https://www.securedevelopment.com) for analysis. 
 
 ## Scanners supported
 
@@ -13,6 +13,9 @@ Reports can optionally be sent to [SecureDevelopment by Federacy](https://www.se
 | [npm audit](https://docs.npmjs.com/cli/audit) | JavaScript |
 | [yarn audit](https://yarnpkg.com/lang/en/docs/cli/audit/) | JavaScript |
 | [Gosec](https://github.com/securego/gosec) | Go | 
+| [Bandit](https://github.com/coinbase/salus/blob/master/docs/scanners/bandit.md) | Python |
+| [Cargo Audit](https://github.com/coinbase/salus/blob/master/docs/scanners/cargo_audit.md) | Rust |
+| [semgrep](https://github.com/coinbase/salus/blob/master/docs/scanners/semgrep.md) | [Many](https://semgrep.dev/docs/status/) |
 | [PatternSearch](https://github.com/coinbase/salus/blob/master/docs/scanners/pattern_search.md) | n/a (uses [Sift](https://sift-tool.org/)) | 
 
 ## Example usage
@@ -97,6 +100,7 @@ jobs:
 | report_uri | Where to send Salus reports | file://../salus-report.json | Any URI |
 | report_format | What format to use for report | json | json, yaml, txt |
 | report_verbosity | Whether to enable a verbose report | true | true, false |
+| salus_configuration | Where to find Salus configuration | file://../salus-configuration.yaml | Any URI |
 
 Note: active_scanners and enforced_scanners must be yaml formatted for Salus configuration file.
 
@@ -132,3 +136,6 @@ Steps:
 3. Click 'Create Application'
 4. Copy example job to your workflow in `.github/workflows`
 
+## Contributors
+
+[Chris Czub](https://github.com/zbuc)

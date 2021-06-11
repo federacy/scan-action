@@ -1,5 +1,8 @@
 #!/bin/sh -l
 
+export PATH="$PATH:/root/.local/bin"
+export PYTHONPATH="$PYTHONPATH:/root/.local/lib/python3.7/site-packages"
+
 echo "
 config_version: 1
 active_scanners: $INPUT_ACTIVE_SCANNERS
@@ -24,4 +27,4 @@ reports:
     format: $INPUT_REPORT_FORMAT
     verbose: $INPUT_REPORT_VERBOSITY" | tee $GITHUB_WORKSPACE/../salus-configuration.yaml 
 
-cd /home && BUNDLE_GEMFILE=/home/Gemfile bundle exec /home/bin/salus scan --repo_path $GITHUB_WORKSPACE --config "file://../salus-configuration.yaml"
+cd /home && BUNDLE_GEMFILE=/home/Gemfile bundle exec /home/bin/salus scan --repo_path "$GITHUB_WORKSPACE" --config "$INPUT_SALUS_CONFIGURATION"
