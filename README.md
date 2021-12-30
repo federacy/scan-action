@@ -2,8 +2,6 @@
 
 This action utilizes [Salus](https://github.com/coinbase/salus) from Coinbase to run SAST and dependency scans. 
 
-Bundle Audit, Brakeman, NPM Audit, and Yarn Audit reports can optionally be sent to [SecureDevelopment by Federacy](https://www.securedevelopment.com) for analysis. 
-
 ## Scanners supported
 
 | Name | Language | 
@@ -20,6 +18,8 @@ Bundle Audit, Brakeman, NPM Audit, and Yarn Audit reports can optionally be sent
 
 ## Example usage
 
+`.github/workflows/example.yml`
+
 ### Defaults
 
 ```
@@ -33,7 +33,7 @@ jobs:
     - uses: actions/checkout@v1
     - name: Salus Scan
       id: salus_scan
-      uses: federacy/scan-action@0.1.1
+      uses: federacy/scan-action@0.1.4
 ```
 
 ### Single scanner
@@ -49,7 +49,7 @@ jobs:
     - uses: actions/checkout@v1
     - name: Salus Scan
       id: salus_scan
-      uses: federacy/scan-action@0.1.1
+      uses: federacy/scan-action@0.1.4
       with:
           active_scanners: "\n  - Brakeman"
           enforced_scanners: "\n  - Brakeman"
@@ -68,7 +68,7 @@ jobs:
     - uses: actions/checkout@v1
     - name: Salus Scan
       id: salus_scan
-      uses: federacy/scan-action@0.1.1
+      uses: federacy/scan-action@0.1.4
       with:
           enforced_scanners: "none"
 ```
@@ -86,7 +86,7 @@ jobs:
     - uses: actions/checkout@v1
     - name: Salus Scan
       id: salus_scan
-      uses: federacy/scan-action@0.1.1
+      uses: federacy/scan-action@0.1.4
       env:
         SALUS_CONFIGURATION: "file://../salus-configuration.yaml file://config/pattern_search.yaml"
 ```
@@ -97,7 +97,7 @@ jobs:
 | --------- | ----------- | ------- | ------- |
 | active_scanners | Scanners to run | all | Brakeman, PatternSearch, BundleAudit, NPMAudit, GoSec |
 | enforced_scanners | Scanners that block builds | all | Brakeman, PatternSearch, BundleAudit, NPMAudit, GoSec |
-| report_uri | Where to send Salus reports | file://../salus-report.json | Any URI |
+| report_uri | Where to send Salus reports | file://salus-report.json | Any URI |
 | report_format | What format to use for report | json | json, yaml, txt |
 | report_verbosity | Whether to enable a verbose report | true | true, false |
 | salus_configuration | Where to find Salus configuration | file://../salus-configuration.yaml | Any URI |
@@ -127,15 +127,7 @@ Stored in custom_info of a Salus scan.
 | github_base_ref | GITHUB_BASE_REF | Ref of the base repository, if forked |
 | github_home | HOME | Path to home directory used by Github |
 
-## Sending reports to dashboard
-
-Steps:
-
-1. Create free account on [SecureDevelopment by Federacy](https://www.securedevelopment.com)
-2. Click 'Applications' in navbar
-3. Click 'Create Application'
-4. Copy example job to your workflow in `.github/workflows`
-
 ## Contributors
 
 [Chris Czub](https://github.com/zbuc)
+[Andre Azzolini](https://github.com/apazzolini)

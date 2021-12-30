@@ -17,7 +17,7 @@ inputs:
   report_uri:
     description: 'Where to send Salus reports'
     required: false
-    default: 'file://../salus-report.json'
+    default: 'file://salus-report.json'
   report_format:
     description: 'Format of the report (json, yaml, txt)'
     required: false
