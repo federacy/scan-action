@@ -129,5 +129,6 @@ Stored in custom_info of a Salus scan.
 
 ## Contributors
 
-[Chris Czub](https://github.com/zbuc)
-[Andre Azzolini](https://github.com/apazzolini)
+[Chris Czub](https://github.com/zbuc)   
+[Andre Azzolini](https://github.com/apazzolini)   
+[Quentin Le Sceller](https://github.com/quentinlesceller)   
